@@ -19,11 +19,11 @@ package org.apache.spark.sql.service.server;
 
 import java.util.concurrent.ThreadFactory;
 
-public class ThreadFactoryWithName implements ThreadFactory {
+public class NamedThreadFactory implements ThreadFactory {
 
   private final String namePrefix;
 
-  public ThreadFactoryWithName(String threadPoolName) {
+  public NamedThreadFactory(String threadPoolName) {
     namePrefix = threadPoolName;
   }
 

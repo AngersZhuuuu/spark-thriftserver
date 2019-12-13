@@ -44,7 +44,7 @@ import org.apache.spark.sql.service.cli.CLIService;
 import org.apache.spark.sql.service.internal.ServiceConf;
 import org.apache.spark.sql.service.rpc.thrift.TCLIService;
 import org.apache.spark.sql.service.rpc.thrift.TCLIService.Iface;
-import org.apache.spark.sql.service.server.ThreadFactoryWithName;
+import org.apache.spark.sql.service.server.NamedThreadFactory;
 
 public class ThriftHttpCLIService extends ThriftCLIService {
 
@@ -66,7 +66,7 @@ public class ThriftHttpCLIService extends ThriftCLIService {
       ThreadPoolExecutor executorService =
           new ThreadPoolExecutor(minWorkerThreads, maxWorkerThreads,
               workerKeepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(),
-          new ThreadFactoryWithName(threadPoolName));
+          new NamedThreadFactory(threadPoolName));
       ExecutorThreadPool threadPool = new ExecutorThreadPool(executorService);
 
       // HTTP Server

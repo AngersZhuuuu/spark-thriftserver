@@ -35,7 +35,7 @@ import org.apache.spark.sql.service.auth.SparkAuthFactory;
 import org.apache.spark.sql.service.auth.SparkAuthUtils;
 import org.apache.spark.sql.service.cli.CLIService;
 import org.apache.spark.sql.service.internal.ServiceConf;
-import org.apache.spark.sql.service.server.ThreadFactoryWithName;
+import org.apache.spark.sql.service.server.NamedThreadFactory;
 
 public class ThriftBinaryCLIService extends ThriftCLIService {
 
@@ -50,7 +50,7 @@ public class ThriftBinaryCLIService extends ThriftCLIService {
       String threadPoolName = "SparkThriftServer-Handler-Pool";
       ExecutorService executorService = new ThreadPoolExecutor(minWorkerThreads, maxWorkerThreads,
           workerKeepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(),
-          new ThreadFactoryWithName(threadPoolName));
+          new NamedThreadFactory(threadPoolName));
 
       // Thrift configs
       sparkAuthFactory = new SparkAuthFactory(sqlConf);
